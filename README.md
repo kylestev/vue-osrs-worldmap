@@ -1,4 +1,7 @@
-# wm2
+# Vue.js OSRS World Map
+
+Huge shoutout to Explv's Map Viewer for the inspiration and the coordinate
+system code for translating from OSRS game tiles -> Lat./Long.
 
 ## Project setup
 ```
