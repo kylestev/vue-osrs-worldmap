@@ -5,6 +5,10 @@
     @update:zoom="x => { zoom = x }"
     :options="{ zoomControl: false }"
   >
+    <rs-location-search
+      :locations="locations"
+      @input="x => { myLocation = x }"
+    />
     <rs-tile-layer :floor="floor"/>
     <!-- We need to wait for the $nextTick callback to fire -->
     <template v-if="map">
@@ -25,6 +29,7 @@
 import { LMap } from 'vue2-leaflet'
 import RsTileLayer from './RsTileLayer'
 import RsLocationMarker from './RsLocationMarker'
+import RsLocationSearch from './Controls/RsLocationSearch'
 
 import { Position } from '../model/Position'
 import locations from '../data/locations.json'
@@ -48,6 +53,7 @@ export default {
   components: {
     LMap,
     RsLocationMarker,
+    RsLocationSearch,
     RsTileLayer
   },
 

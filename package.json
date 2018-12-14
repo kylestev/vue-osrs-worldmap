@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "vue": "^2.5.17",
+    "vue-select": "^2.5.1",
     "vue2-leaflet": "^1.2.3"
   },
   "devDependencies": {
