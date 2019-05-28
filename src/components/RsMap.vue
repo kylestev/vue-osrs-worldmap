@@ -75,6 +75,14 @@ export default {
         this.map.setView([-82, -148], 9)
       }
     })
+  },
+
+  watch: {
+    tile (x) {
+      if (this.map && x) {
+        this.map.setView(x.toLatLng(this.map), 9)
+      }
+    }
   }
 }
 </script>
