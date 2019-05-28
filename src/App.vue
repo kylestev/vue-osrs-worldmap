@@ -15,14 +15,32 @@ export default {
       floor: 0
     }
   },
-  mounted () {
-    const [_, x, y, z] = /#tile=(\d+),(\d+)(?:,(\d+))?/.exec(window.location.hash).map(x => parseInt(x))
+  methods: {
+    parseLocation () {
+      const [_, x, y, z] = /#tile=(\d+),(\d+)(?:,(\d+))?/.exec(window.location.hash).map(x => parseInt(x))
 
-    console.log({ x, y, z })
-    if (x && y) {
-      this.tile = new Position(x, y, z)
-      this.floor = z || 0
+      console.log({ x, y, z })
+      if (x && y) {
+        return new Position(x, y, z || 0)
+      }
+    },
+    updateLocation () {
+      const location = this.parseLocation()
+      if (location) {
+        this.tile = location
+        this.floor = location.z
+      } else {
+        this.tile = null
+        this.floor = 0
+      }
     }
+  },
+  mounted () {
+    window.onhashchange = () => {
+      this.updateLocation()
+    }
+
+    this.updateLocation()
   }
 }
 </script>
