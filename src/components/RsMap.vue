@@ -70,9 +70,12 @@ export default {
     this.$nextTick(() => {
       window.map = this.map = this.$refs.map.mapObject
       if (this.tile) {
-        this.map.setView(this.tile.toLatLng(this.map), 9)
+        const latlng = this.tile.toLatLng(this.map)
+        const pos = Position.fromLatLng(this.map, latlng)
+        pos.toLeaflet(this.map).addTo(this.map)
+        this.map.setView(latlng, this.zoom)
       } else {
-        this.map.setView([-82, -148], 9)
+        this.map.setView([-82, -148], this.zoom)
       }
     })
   },
@@ -80,7 +83,7 @@ export default {
   watch: {
     tile (x) {
       if (this.map && x) {
-        this.map.setView(x.toLatLng(this.map), 9)
+        this.map.setView(x.toLatLng(this.map), this.zoom)
       }
     }
   }

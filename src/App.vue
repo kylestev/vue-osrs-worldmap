@@ -17,9 +17,15 @@ export default {
   },
   methods: {
     parseLocation () {
-      const [_, x, y, z] = /#tile=(\d+),(\d+)(?:,(\d+))?/.exec(window.location.hash).map(x => parseInt(x))
+      const params = new URLSearchParams(location.search)
+      const tile = params.get('tile') || '3223,3220,1'
+      const [x, y, z] = tile.split(',').map(x => parseInt(x))
 
-      console.log({ x, y, z })
+      const zoom = params.get('zoom')
+      if (zoom) {
+        this.$refs.rsMap.zoom = parseInt(zoom)
+      }
+
       if (x && y) {
         return new Position(x, y, z || 0)
       }
