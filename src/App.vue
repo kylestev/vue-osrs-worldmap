@@ -21,7 +21,7 @@ export default {
       const tile = params.get('tile') || '3223,3220,1'
       const [x, y, z] = tile.split(',').map(x => parseInt(x))
 
-      const zoom = params.get('zoom')
+      const zoom = params.get('zoom') || '9'
       if (zoom) {
         this.$refs.rsMap.zoom = parseInt(zoom)
       }
