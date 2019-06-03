@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     parseLocation () {
-      const params = new URLSearchParams(location.hash)
+      const params = new URLSearchParams(location.hash.replace(/^#/, ''))
       const tile = params.get('tile') || '3223,3220,1'
       const [x, y, z] = tile.split(',').map(x => parseInt(x))
 
