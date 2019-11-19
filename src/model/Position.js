@@ -2,11 +2,11 @@
 
 import L from 'leaflet'
 
-export const MAP_HEIGHT_PX = 270080 // Total height of the map in px at max zoom level
+export const MAP_HEIGHT_PX = 296704 // Total height of the map in px at max zoom level
 export const RS_TILE_WIDTH_PX = 32
 export const RS_TILE_HEIGHT_PX = 32 // Width and height in px of an rs tile at max zoom level
 export const RS_OFFSET_X = 1152 // Amount to offset x coordinate to get correct value
-export const RS_OFFSET_Y = 9928 // Amount to offset y coordinate to get correct value
+export const RS_OFFSET_Y = 8328 // Amount to offset y coordinate to get correct value
 
 export class Position {
   constructor (x, y, z) {
@@ -44,7 +44,7 @@ export class Position {
   toLeaflet (map) {
     const point = map.project(this.toLatLng(map), map.getMaxZoom())
     const startX = (Math.floor(point.x / RS_TILE_WIDTH_PX) * RS_TILE_WIDTH_PX) + (RS_TILE_WIDTH_PX / 4)
-    const startY = (Math.floor(point.y / RS_TILE_HEIGHT_PX) * RS_TILE_HEIGHT_PX) - (RS_TILE_HEIGHT_PX / 4)
+    const startY = (Math.floor(point.y / RS_TILE_HEIGHT_PX) * RS_TILE_HEIGHT_PX)
     const endX = startX + RS_TILE_WIDTH_PX
     const endY = startY + RS_TILE_HEIGHT_PX
     const startLatLng = map.unproject(L.point(startX, startY), map.getMaxZoom())
