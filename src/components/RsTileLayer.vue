@@ -11,7 +11,7 @@
 <script>
 import { LTileLayer } from 'vue2-leaflet'
 
-const MAP_DATA_BASE = 'https://raw.githubusercontent.com/Explv/osrs_map_full_20180601/master'
+const MAP_DATA_BASE = 'https://raw.githubusercontent.com/Explv/osrs_map_full_2019_09_13/master'
 
 export default {
   props: {
