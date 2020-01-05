@@ -56,7 +56,8 @@ export default {
       color: 'cyan',
       map: null,
       locations,
-      zoom: 7
+      zoom: 7,
+      activeTileRect: null
     }
   },
 
@@ -64,16 +65,25 @@ export default {
   },
 
   methods: {
+    redraw () {
+      const map = this.map
+      const tile = this.tile
+      if (this.activeTileRect !== null) {
+        map.removeLayer(this.activeTileRect)
+      }
+
+      this.activeTileRect = tile.toLeaflet(map)
+      this.activeTileRect.addTo(map)
+
+      map.setView(tile.toLatLng(map), this.zoom)
+    }
   },
 
   mounted () {
     this.$nextTick(() => {
       window.map = this.map = this.$refs.map.mapObject
       if (this.tile) {
-        const latlng = this.tile.toLatLng(this.map)
-        const pos = Position.fromLatLng(this.map, latlng)
-        pos.toLeaflet(this.map).addTo(this.map)
-        this.map.setView(latlng, this.zoom)
+        this.redraw()
       } else {
         this.map.setView([-82, -148], this.zoom)
       }
@@ -83,7 +93,7 @@ export default {
   watch: {
     tile (x) {
       if (this.map && x) {
-        this.map.setView(x.toLatLng(this.map), this.zoom)
+        this.redraw()
       }
     }
   }
