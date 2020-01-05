@@ -7,7 +7,7 @@
   >
     <rs-tile-layer :floor="floor"/>
     <!-- We need to wait for the $nextTick callback to fire -->
-    <template v-if="map">
+    <template v-if="map && showLabels">
       <!-- Render all the locations -->
       <rs-location-marker
         v-for="(location, $x) in locations"
@@ -31,6 +31,11 @@ import locations from '../data/locations.json'
 
 export default {
   props: {
+    showLabels: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     floor: {
       type: Number,
       required: false,

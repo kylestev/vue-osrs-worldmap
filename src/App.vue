@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <rs-map ref="rsMap" :floor="floor" :tile="tile" @mapready="x => { map = x }"/>
+    <rs-map ref="rsMap" :show-labels="showLabels" :floor="floor" :tile="tile" @mapready="x => { map = x }"/>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ import { Position } from './model/Position'
 export default {
   data () {
     return {
+      showLabels: true,
       tile: null,
       map: null,
       floor: 0
@@ -18,6 +19,7 @@ export default {
   methods: {
     parseLocation () {
       const params = new URLSearchParams(location.hash.replace(/^#/, ''))
+      this.showLabels = !params.has('hide-labels')
       const tile = params.get('tile') || '3223,3220,1'
       const [x, y, z] = tile.split(',').map(x => parseInt(x))
 
